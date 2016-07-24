@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>canvas</title>
+</head>
+<style>
+	#canvas{
+		/*border:1px solid black;*/
+		position: absolute;
+		margin:auto;
+		left:0;
+		right:0;
+		top:0;
+		bottom: 0;
+		background-image:url(biao1.jpg);
+	}
+</style>
+<body>
+	<canvas id="canvas" width="600" height="600" IMG="biao1.jpg">
+	
+	</canvas>
+</body>
+<script>
+	var canvas=document.querySelector('#canvas');
+	var ctx=canvas.getContext('2d');
+	/*ctx.beginPath();
+	ctx.moveTo(300,350);
+	ctx.lineTo(300,420);
+	ctx.moveTo(350,300);
+	ctx.arc(300,300,50,0,(Math.PI/180)*360);
+	ctx.moveTo(300,250);
+	ctx.lineTo(300,100);
+	ctx.stroke();
+	ctx.closePath();
+
+	ctx.save();
+	ctx.translate(300,300);
+	ctx.moveTo(0,0);
+	ctx.lineTo(30,0);
+	ctx.strokeStyle='red';
+    ctx.moveTo(0,0);
+    ctx.lineTo(0,60);
+    ctx.stroke();
+    ctx.closePath();
+    ctx.translate(0,0);
+    ctx.restore();
+     
+     ctx.beginPath();
+    ctx.translate(300,300);
+    ctx.moveTo(0,0);
+    ctx.lineTo(0,-100);
+    ctx.stroke();
+    ctx.translate(0,0);
+     ctx.save();
+    ctx.beginPath();
+    for(var i=0;i<12;i++){
+    	ctx.rotate((Math.PI/180)*30);
+    	ctx.moveTo(0,0);
+    	ctx.lineTo(0,-100);
+    }
+    ctx.stroke();
+    ctx.translate(0,0);
+    ctx.restore();*/
+    
+    var r=function(deg){
+    	return (Math.PI/180)*deg;
+    }
+
+        
+      
+  
+    var drowclock=function(){ 
+    	ctx.clearRect(0,0,600,600);
+    /*	 var img = new Image(); 
+         img.src = 'biao1.jpg';
+         img.onload = function(){
+          var ptrn = ctx.createPattern(img,'repeat');
+          ctx.fillStyle = ptrn;
+          ctx.save();
+          ctx.beginPath();
+          ctx.moveTo(300,300);
+          ctx.stroke();
+          ctx.closePath();
+          ctx.restore();
+          ctx.fillRect(0,0,300,300);
+    }*/	 
+   
+   /* ctx.save();
+    ctx.beginPath();
+    ctx.translate(300,300);
+    ctx.arc(0,0,200,0,r(360));
+    ctx.stroke();
+    ctx.closePath();
+    ctx.restore();
+
+     ctx.save();
+     ctx.beginPath();
+     ctx.translate(300,300);
+     for(var i=0;i<60;i++){
+     	ctx.moveTo(0,-200);
+     	if(i%5===0){
+     		ctx.lineTo(0,-180);
+     	}else{
+            ctx.lineTo(0,-190)
+     	}
+     	ctx.rotate(r(6));
+     }
+     ctx.stroke();
+     ctx.closePath();
+     ctx.restore();*/
+
+/*     ctx.save();
+     ctx.beginPath();
+      ctx.translate(300,300);
+      ctx.arc(0,0,5,0,r(360));
+       ctx.stroke();
+      ctx.translate(0,0);
+     ctx.closePath();
+     ctx.restore();
+*/
+//秒针
+  var now=new Date();
+  var s=now.getSeconds();
+   var m = now.getMilliseconds();
+   var ss = 360*((s*1000+m)/60000);
+     ctx.save();
+     ctx.translate(300,300);
+     ctx.rotate(r(ss));
+     /*ctx.linewidth='8';  
+     ctx.fillStyle="blue";*/
+     ctx.beginPath();
+     ctx.moveTo(0,12); 
+     ctx.lineTo(0,36);  
+     ctx.moveTo(0,-10);
+     ctx.lineTo(0,-240);
+  
+      ctx.stroke();
+     ctx.translate(0,0);
+     ctx.closePath();
+     ctx.restore();
+//分针 
+
+     ctx.save();
+     ctx.translate(300,300);
+     var now=new Date();
+     var s=now.getSeconds();
+     var m=now.getMinutes();
+     var deg = 360*((m*60+s)/3600);
+     ctx.rotate(r(deg));
+     ctx.beginPath();
+      ctx.moveTo(0,12);
+      ctx.lineTo(0,36);
+         ctx.stroke();
+      ctx.moveTo(0,-10);
+      ctx.lineTo(0,-180);
+      ctx.stroke();
+      ctx.translate(0,0);
+     ctx.closePath();
+     ctx.restore();
+//时针
+ var now=new Date();
+ var s=now.getSeconds();
+ var m=now.getMinutes();
+ var h=now.getHours();
+ var deg=360*((h*60*60+m*60+s)/43200);
+     ctx.save();
+     ctx.translate(300,300);
+     ctx.rotate(r(deg));
+     ctx.beginPath();
+     ctx.moveTo(0,12);
+      ctx.lineTo(0,36);
+      ctx.stroke();
+      ctx.moveTo(0,-10);
+      ctx.lineTo(0,-100);
+     ctx.stroke();
+     /* ctx.fillStyle='blue';*/
+     ctx.translate(0,0);
+     ctx.closePath();
+     ctx.restore();
+ 
+}
+   drowclock();
+   setInterval(drowclock,1);
+</script>
+</html>
